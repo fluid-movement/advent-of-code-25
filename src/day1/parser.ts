@@ -1,4 +1,4 @@
-import type { Command } from "./types.js";
+import type { Command } from "./types.ts";
 
 export function parseCommand(line: string): Command {
 	return {

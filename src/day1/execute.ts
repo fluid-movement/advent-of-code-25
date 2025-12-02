@@ -1,4 +1,4 @@
-import type { Command, Result } from "./types.js";
+import type { Command, Result } from "./types.ts";
 
 export function execute(
 	current: number,

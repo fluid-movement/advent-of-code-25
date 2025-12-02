@@ -1,18 +1,21 @@
 {
+  "lsp": {
+    "deno": {
+      "settings": {
+        "deno": {
+          "enable": true,
+          "lint": true,
+          "unstable": false
+        }
+      }
+    }
+  },
   "languages": {
-    "JavaScript": {
-      "formatter": { "language_server": { "name": "biome" } },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
-    },
     "TypeScript": {
-      "formatter": { "language_server": { "name": "biome" } },
-      "code_actions_on_format": {
-        "source.fixAll.biome": true,
-        "source.organizeImports.biome": true
-      }
+      "language_servers": ["deno", "!typescript-language-server"]
+    },
+    "TSX": {
+      "language_servers": ["deno", "!typescript-language-server"]
     }
   }
 }
