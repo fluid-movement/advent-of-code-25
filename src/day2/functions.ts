@@ -1,19 +1,6 @@
 import * as v from "@valibot/valibot";
-import { readLines } from "../utils/file.ts";
+import { parseLines } from "../utils/file.ts";
 import type { Result } from "./types.ts";
-
-export function parseFile(file: string): Result {
-	const lines = readLines(file, ",");
-
-	const result: Result = { part1: 0, part2: 0 };
-
-	lines.forEach((line) => {
-		result.part1 += part1(line);
-		result.part2 += part2(line);
-	});
-
-	return result;
-}
 
 const lineSchema = v.pipe(
 	v.tuple([v.string(), v.string()]),
@@ -29,13 +16,32 @@ const lineSchema = v.pipe(
 
 export type LineRange = v.InferOutput<typeof lineSchema>;
 
+export function parseFile(file: string): Result {
+	const ranges = parseLines(file, lineSchema, {
+		delimiter: ",",
+		lineDelimiter: "-"
+	});
+
+	const result: Result = { part1: 0, part2: 0 };
+
+	ranges.forEach((range) => {
+		result.part1 += part1Range(range);
+		result.part2 += part2Range(range);
+	});
+
+	return result;
+}
+
 export function parseLine(line: string): LineRange {
 	return v.parse(lineSchema, line.split("-"));
 }
 
 export function part1(line: string): number {
 	const range = parseLine(line);
+	return part1Range(range);
+}
 
+function part1Range(range: LineRange): number {
 	let total = 0;
 	for (let i = range.min; i <= range.max; i++) {
 		total += check(i);
@@ -61,7 +67,10 @@ export function check(input: number): number {
 
 export function part2(line: string): number {
 	const range = parseLine(line);
+	return part2Range(range);
+}
 
+function part2Range(range: LineRange): number {
 	let total = 0;
 	for (let i = range.min; i <= range.max; i++) {
 		total += checkMore(i);

@@ -1,9 +1,15 @@
 {
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev": "deno run --watch --allow-read main.ts",
+    "test": "deno test --allow-read",
+    "day": "deno run --allow-read main.ts --day",
+    "day1": "deno run --allow-read src/day1/index.ts",
+    "day2": "deno run --allow-read src/day2/index.ts",
+    "all": "deno run --allow-read main.ts --all"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
+    "@std/cli": "jsr:@std/cli@1",
     "@valibot/valibot": "jsr:@valibot/valibot@^1.2.0"
   }
 }

@@ -1,102 +1,129 @@
-import { assertEquals, assertThrows } from "jsr:@std/assert";
-import { describe, it } from "jsr:@std/testing/bdd";
+import { assertEquals, assertThrows } from "@std/assert";
 import * as f from "../functions.ts";
 
-describe("day 2", () => {
-	describe("results", () => {
-		it("calculates the correct result", () => {
-			assertEquals(f.parseFile("day2/input/input.txt"), {
-				part1: 23039913998,
-				part2: 35950619148,
-			});
-		});
+Deno.test("day2 - results - calculates the correct result", () => {
+	assertEquals(f.parseFile("day2/input/input.txt"), {
+		part1: 23039913998,
+		part2: 35950619148,
 	});
-	describe("step1", () => {
-		const testCases = [
-			{ range: "11-22", expected: 33 },
-			{ range: "95-115", expected: 99 },
-			{ range: "998-1012", expected: 1010 },
-		];
+});
 
-		testCases.forEach(({ range, expected }) => {
-			it(`gets correct number of invalid ids for range ${range}`, () => {
-				assertEquals(f.part1(range), expected);
-			});
-		});
+Deno.test("day2 - step1 - gets correct number of invalid ids for range 11-22", () => {
+	assertEquals(f.part1("11-22"), 33);
+});
+
+Deno.test("day2 - step1 - gets correct number of invalid ids for range 95-115", () => {
+	assertEquals(f.part1("95-115"), 99);
+});
+
+Deno.test("day2 - step1 - gets correct number of invalid ids for range 998-1012", () => {
+	assertEquals(f.part1("998-1012"), 1010);
+});
+
+Deno.test("day2 - check - should verify correct ID: 1212", () => {
+	assertEquals(f.check(1212), 1212);
+});
+
+Deno.test("day2 - check - should verify correct ID: 1111", () => {
+	assertEquals(f.check(1111), 1111);
+});
+
+Deno.test("day2 - check - should verify correct ID: 2323", () => {
+	assertEquals(f.check(2323), 2323);
+});
+
+Deno.test("day2 - check - should reject incorrect ID: 1234", () => {
+	assertEquals(f.check(1234), 0);
+});
+
+Deno.test("day2 - check - should reject incorrect ID: 123", () => {
+	assertEquals(f.check(123), 0);
+});
+
+Deno.test("day2 - check - should reject incorrect ID: 12345", () => {
+	assertEquals(f.check(12345), 0);
+});
+
+Deno.test("day2 - step2 - gets correct number of invalid ids for range 11-22", () => {
+	assertEquals(f.part2("11-22"), 33);
+});
+
+Deno.test("day2 - step2 - gets correct number of invalid ids for range 95-115", () => {
+	assertEquals(f.part2("95-115"), 99 + 111);
+});
+
+Deno.test("day2 - step2 - gets correct number of invalid ids for range 998-1012", () => {
+	assertEquals(f.part2("998-1012"), 999 + 1010);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 11", () => {
+	assertEquals(f.checkMore(11), 11);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 111", () => {
+	assertEquals(f.checkMore(111), 111);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 1188511885", () => {
+	assertEquals(f.checkMore(1188511885), 1188511885);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 446446", () => {
+	assertEquals(f.checkMore(446446), 446446);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 2121212121", () => {
+	assertEquals(f.checkMore(2121212121), 2121212121);
+});
+
+Deno.test("day2 - checkMore - should verify correct ID: 824824824", () => {
+	assertEquals(f.checkMore(824824824), 824824824);
+});
+
+Deno.test("day2 - checkMore - should reject incorrect ID: 1234", () => {
+	assertEquals(f.checkMore(1234), 0);
+});
+
+Deno.test("day2 - checkMore - should reject incorrect ID: 123", () => {
+	assertEquals(f.checkMore(123), 0);
+});
+
+Deno.test("day2 - checkMore - should reject incorrect ID: 12345", () => {
+	assertEquals(f.checkMore(12345), 0);
+});
+
+Deno.test("day2 - line parser - should parse line range 10-20 correctly", () => {
+	const range = f.parseLine("10-20");
+	assertEquals(range.min, 10);
+	assertEquals(range.max, 20);
+});
+
+Deno.test("day2 - line parser - should parse line range 5-15 correctly", () => {
+	const range = f.parseLine("5-15");
+	assertEquals(range.min, 5);
+	assertEquals(range.max, 15);
+});
+
+Deno.test("day2 - line parser - should parse line range 100-200 correctly", () => {
+	const range = f.parseLine("100-200");
+	assertEquals(range.min, 100);
+	assertEquals(range.max, 200);
+});
+
+Deno.test("day2 - line parser - should throw error on invalid data: 10-abc", () => {
+	assertThrows(() => {
+		f.parseLine("10-abc");
 	});
-	describe("check", () => {
-		const validIds = [
-			{ input: 1212, expected: 1212 },
-			{ input: 1111, expected: 1111 },
-			{ input: 2323, expected: 2323 },
-		];
-		const invalidIds = [1234, 123, 12345];
+});
 
-		validIds.forEach(({ input, expected }) => {
-			it(`should verify correct ID: ${input}`, () => {
-				assertEquals(f.check(input), expected);
-			});
-		});
-
-		invalidIds.forEach((input) => {
-			it(`should reject incorrect ID: ${input}`, () => {
-				assertEquals(f.check(input), 0);
-			});
-		});
+Deno.test("day2 - line parser - should throw error on invalid data: abc-20", () => {
+	assertThrows(() => {
+		f.parseLine("abc-20");
 	});
-	describe("step2", () => {
-		const testCases = [
-			{ range: "11-22", expected: 33 },
-			{ range: "95-115", expected: 99 + 111 },
-			{ range: "998-1012", expected: 999 + 1010 },
-		];
+});
 
-		testCases.forEach(({ range, expected }) => {
-			it(`gets correct number of invalid ids for range ${range}`, () => {
-				assertEquals(f.part2(range), expected);
-			});
-		});
-	});
-	describe("check", () => {
-		const validIds = [11, 111, 1188511885, 446446, 2121212121, 824824824];
-		const invalidIds = [1234, 123, 12345];
-
-		validIds.forEach((input) => {
-			it(`should verify correct ID: ${input}`, () => {
-				assertEquals(f.checkMore(input), input);
-			});
-		});
-
-		invalidIds.forEach((input) => {
-			it(`should reject incorrect ID: ${input}`, () => {
-				assertEquals(f.checkMore(input), 0);
-			});
-		});
-	});
-
-	describe("line parser", () => {
-		const validRanges = [
-			{ input: "10-20", expectedMin: 10, expectedMax: 20 },
-			{ input: "5-15", expectedMin: 5, expectedMax: 15 },
-			{ input: "100-200", expectedMin: 100, expectedMax: 200 },
-		];
-
-		validRanges.forEach(({ input, expectedMin, expectedMax }) => {
-			it(`should parse line range ${input} correctly`, () => {
-				const range = f.parseLine(input);
-				assertEquals(range.min, expectedMin);
-				assertEquals(range.max, expectedMax);
-			});
-		});
-
-		const invalidInputs = ["10-abc", "abc-20", "10"];
-
-		invalidInputs.forEach((input) => {
-			it(`should throw error on invalid data: ${input}`, () => {
-				assertThrows(() => {
-					f.parseLine(input);
-				});
-			});
-		});
+Deno.test("day2 - line parser - should throw error on invalid data: 10", () => {
+	assertThrows(() => {
+		f.parseLine("10");
 	});
 });

@@ -1,10 +1,8 @@
-import { readLines } from "../utils/file.ts";
 import { execute } from "./execute.ts";
-import { parseCommands } from "./parser.ts";
+import { parseCommandsFromFile } from "./parser.ts";
 import type { Result } from "./types.ts";
 
-const lines = readLines("day1/input/input.txt");
-const commands = parseCommands(lines);
+const commands = parseCommandsFromFile("day1/input/input.txt");
 
 let current = 50;
 let result: Result = { atZero: 0, passedZero: 0 };
