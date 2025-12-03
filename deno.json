@@ -2,6 +2,7 @@
   "tasks": {
     "dev": "deno run --watch --allow-read main.ts",
     "test": "deno test --allow-read",
+    "test:day3": "deno test --allow-read src/day3/tests/test.ts",
     "day": "deno run --allow-read main.ts --day",
     "day1": "deno run --allow-read src/day1/index.ts",
     "day2": "deno run --allow-read src/day2/index.ts",
