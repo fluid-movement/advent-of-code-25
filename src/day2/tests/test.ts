@@ -2,21 +2,21 @@ import { assertEquals, assertThrows } from "@std/assert";
 import * as f from "../functions.ts";
 
 Deno.test("day2 - results - calculates the correct result", () => {
-	assertEquals(f.parseFile("day2/input/input.txt"), {
+	assertEquals(f.process("day2/input/input.txt"), {
 		part1: 23039913998,
 		part2: 35950619148,
 	});
 });
 
-Deno.test("day2 - step1 - gets correct number of invalid ids for range 11-22", () => {
+Deno.test("day2 - part1 - gets correct number of invalid ids for range 11-22", () => {
 	assertEquals(f.part1("11-22"), 33);
 });
 
-Deno.test("day2 - step1 - gets correct number of invalid ids for range 95-115", () => {
+Deno.test("day2 - part1 - gets correct number of invalid ids for range 95-115", () => {
 	assertEquals(f.part1("95-115"), 99);
 });
 
-Deno.test("day2 - step1 - gets correct number of invalid ids for range 998-1012", () => {
+Deno.test("day2 - part1 - gets correct number of invalid ids for range 998-1012", () => {
 	assertEquals(f.part1("998-1012"), 1010);
 });
 
@@ -44,15 +44,15 @@ Deno.test("day2 - check - should reject incorrect ID: 12345", () => {
 	assertEquals(f.check(12345), 0);
 });
 
-Deno.test("day2 - step2 - gets correct number of invalid ids for range 11-22", () => {
+Deno.test("day2 - part2 - gets correct number of invalid ids for range 11-22", () => {
 	assertEquals(f.part2("11-22"), 33);
 });
 
-Deno.test("day2 - step2 - gets correct number of invalid ids for range 95-115", () => {
+Deno.test("day2 - part2 - gets correct number of invalid ids for range 95-115", () => {
 	assertEquals(f.part2("95-115"), 99 + 111);
 });
 
-Deno.test("day2 - step2 - gets correct number of invalid ids for range 998-1012", () => {
+Deno.test("day2 - part2 - gets correct number of invalid ids for range 998-1012", () => {
 	assertEquals(f.part2("998-1012"), 999 + 1010);
 });
 

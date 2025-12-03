@@ -1,25 +1,30 @@
 import * as v from "@valibot/valibot";
 import { parseLines } from "../utils/file.ts";
-import type { Result } from "./types.ts";
+
+export type Result = {
+	part1: number;
+	part2: number;
+};
 
 const lineSchema = v.pipe(
 	v.tuple([v.string(), v.string()]),
 	v.transform((input: [string, string]) => ({
-		min: parseInt(input[0], 10),
-		max: parseInt(input[1], 10),
+		min: Number(input[0]),
+		max: Number(input[1]),
 	})),
 	v.check(
-		(obj: { min: number; max: number }) => !Number.isNaN(obj.min) && !Number.isNaN(obj.max),
+		(obj: { min: number; max: number }) =>
+			!Number.isNaN(obj.min) && !Number.isNaN(obj.max),
 		"Both values must be valid numbers",
 	),
 );
 
 export type LineRange = v.InferOutput<typeof lineSchema>;
 
-export function parseFile(file: string): Result {
+export function process(file: string): Result {
 	const ranges = parseLines(file, lineSchema, {
 		delimiter: ",",
-		lineDelimiter: "-"
+		lineDelimiter: "-",
 	});
 
 	const result: Result = { part1: 0, part2: 0 };

@@ -1,3 +1,3 @@
-import { parseFile } from "./functions.ts";
+import { process } from "./functions.ts";
 
-console.log(parseFile("day2/input/input.txt"));
+console.log(process("day2/input/input.txt"));
