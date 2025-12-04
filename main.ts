@@ -4,7 +4,7 @@ interface DayModule {
 	execute?: () => void | Promise<void>;
 }
 
-const AVAILABLE_DAYS = [1, 2, 3];
+const AVAILABLE_DAYS = [1, 2, 3, 4];
 
 async function runDay(day: number): Promise<void> {
 	console.log(`\n${"=".repeat(50)}`);
