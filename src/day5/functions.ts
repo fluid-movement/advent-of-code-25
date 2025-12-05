@@ -5,8 +5,10 @@ export type Result = {
   step2: number;
 };
 
+type Tuple = [number, number]
+
 export type Input = {
-  ranges: [number, number][];
+  ranges: Tuple[];
   ids: number[];
 };
 
@@ -16,7 +18,7 @@ export function parse(file: string): Input {
   const [ranges, ids] = readLines(file, "\n\n");
 
   parsed.ranges = ranges.split("\n").map((line) =>
-    line.split("-").map(Number) as [number, number]
+    line.split("-").map(Number) as Tuple
   );
 
   parsed.ids = ids.split("\n").map(Number);
@@ -41,7 +43,7 @@ export function step1(input: Input): number {
 
 export function step2(input: Input): number {
   const sorted = [...input.ranges].sort((a, b) => a[0] - b[0]);
-  const merged: [number, number][] = [];
+  const merged: Tuple[] = [];
   
   for (const [start, end] of sorted) {
     const last = merged.at(-1);
