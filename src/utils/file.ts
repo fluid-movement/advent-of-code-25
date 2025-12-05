@@ -1,12 +1,15 @@
 import * as v from "@valibot/valibot";
 
 export function readInput(filename: string): string {
-	const filepath = new URL(`../${filename}`, import.meta.url).pathname;
-	return Deno.readTextFileSync(filepath);
+  const filepath = new URL(`../${filename}`, import.meta.url).pathname;
+  return Deno.readTextFileSync(filepath);
 }
 
-export function readLines(filename: string, delimiter: string = "\n"): string[] {
-	return readInput(filename).trim().split(delimiter);
+export function readLines(
+  filename: string,
+  delimiter: string = "\n",
+): string[] {
+  return readInput(filename).trim().split(delimiter);
 }
 
 /**
@@ -39,16 +42,18 @@ export function readLines(filename: string, delimiter: string = "\n"): string[] 
  * const data = parseLines("day2/input.txt", rangeSchema, { lineDelimiter: "-" });
  * ```
  */
-export function parseLines<TSchema extends v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>>(
-	filename: string,
-	schema: TSchema,
-	options: { delimiter?: string; lineDelimiter?: string } = {},
+export function parseLines<
+  TSchema extends v.BaseSchema<unknown, unknown, v.BaseIssue<unknown>>,
+>(
+  filename: string,
+  schema: TSchema,
+  options: { delimiter?: string; lineDelimiter?: string } = {},
 ): v.InferOutput<TSchema>[] {
-	const { delimiter = "\n", lineDelimiter } = options;
-	const lines = readLines(filename, delimiter);
+  const { delimiter = "\n", lineDelimiter } = options;
+  const lines = readLines(filename, delimiter);
 
-	return lines.map((line) => {
-		const input = lineDelimiter ? line.split(lineDelimiter) : line;
-		return v.parse(schema, input);
-	});
+  return lines.map((line) => {
+    const input = lineDelimiter ? line.split(lineDelimiter) : line;
+    return v.parse(schema, input);
+  });
 }

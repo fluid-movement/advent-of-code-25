@@ -6,8 +6,7 @@
         "language_server": {
           "name": "deno"
         }
-      },
-      "format_on_save": "on"
+      }
     },
     "TSX": {
       "language_servers": ["deno"],
@@ -15,8 +14,7 @@
         "language_server": {
           "name": "deno"
         }
-      },
-      "format_on_save": "on"
+      }
     }
   },
   "lsp": {

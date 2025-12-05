@@ -35,6 +35,6 @@ Deno.test("day4 - step2 - processes test input correctly", () => {
   assertEquals(f.step2(f.parse("day4/input/step2.txt")), 43);
 });
 
-Deno.test("day4 - result - is correct", () => 	{
-  assertEquals(f.process("day4/input/input.txt"), {step1: 1351, step2: 8345});
+Deno.test("day4 - result - is correct", () => {
+  assertEquals(f.process("day4/input/input.txt"), { step1: 1351, step2: 8345 });
 });

@@ -8,7 +8,7 @@ let current = 50;
 let result: Result = { atZero: 0, passedZero: 0 };
 
 commands.forEach((command) => {
-	({ current, result } = execute(current, result, command));
+  ({ current, result } = execute(current, result, command));
 });
 
 console.log("------ results ------");
